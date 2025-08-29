@@ -8,7 +8,7 @@ export const APP_CONFIG = {
 } as const;
 
 export const API_CONFIG = {
-  baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080",
+  baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL || "http://127.0.0.1:8080",
 } as const;
 
 export const SHANNONS_PER_CKB = 100_000_000;
