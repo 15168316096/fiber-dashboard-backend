@@ -26,10 +26,10 @@ services:
     environment:
       - DATABASE_URL=postgresql://postgres:password@timescaledb:5432/fiber_dashbord
       - RUST_LOG=info
-      - HTTP_PORT=8080
+      - HTTP_PORT=8222
       - FIBER_RPC_URL=http://16.162.99.28:8021/proxy
     ports:
-      - "8080:8080"
+      - "8222:8222"
     networks:
       - fiber-network
     depends_on:
