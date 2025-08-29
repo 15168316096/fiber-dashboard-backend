@@ -23,7 +23,7 @@ macro_rules! jsonrpc {
 
         let req_json: serde_json::Value = serde_json::from_str(&data).unwrap();
 
-        let c = $self.raw.post($self.ckb_uri.clone()).json(&req_json);
+        let c = $self.raw.post($self.ckb_uri.clone()).json(&req_json).bearer_auth($self.token.clone());
         async {
             let resp = c
                 .send()
@@ -52,16 +52,18 @@ pub struct RpcClient {
     raw: Client,
     ckb_uri: Url,
     id: Arc<AtomicU64>,
+    token: String,
 }
 
 impl RpcClient {
-    pub fn new(ckb_uri: &str) -> Self {
+    pub fn new(ckb_uri: &str, token: String) -> Self {
         let ckb_uri = Url::parse(ckb_uri).expect("fiber uri, e.g. \"http://127.0.0.1:8227\"");
 
         RpcClient {
             raw: Client::new(),
             ckb_uri,
             id: Arc::new(AtomicU64::new(0)),
+            token,
         }
     }
 

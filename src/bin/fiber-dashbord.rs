@@ -63,7 +63,8 @@ async fn http_server() {
 async fn timed_commit_states() {
     let rpc_url =
         std::env::var("FIBER_RPC_URL").unwrap_or("http://18.163.221.211:8227".to_string());
-    let rpc = RpcClient::new(&rpc_url);
+    let token = std::env::var("FIBER_RPC_TOKEN").expect("FIBER_RPC_TOKEN not set");
+    let rpc = RpcClient::new(&rpc_url, token);
     loop {
         let mut raw_nodes = Vec::new();
         let mut after_cursor = None;
