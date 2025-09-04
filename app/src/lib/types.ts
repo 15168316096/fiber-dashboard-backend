@@ -141,9 +141,9 @@ export const RustNodeInfoSchema = z.object({
   node_name: z.string(),
   addresses: z.array(z.string()),
   commit_timestamp: z.string(),
-  announce_timestamp: z.string(),
+  announce_timestamp: z.number(),
   chain_hash: z.string(),
-  auto_accept_min_ckb_funding_amount: z.string(),
+  auto_accept_min_ckb_funding_amount: z.number(),
   country: z.string().optional(),
   city: z.string().optional(),
   region: z.string().optional(),
@@ -215,7 +215,16 @@ export interface ChannelsSeries {
 
 export interface CapacitySeries {
   name: "Capacity";
-  points: [timestamp: string, value: string][];
+  points: [
+    timestamp: string,
+    capacity: [
+      sum: string,
+      avg: string,
+      min: string,
+      max: string,
+      median: string,
+    ],
+  ][];
 }
 
 export interface NodesSeries {
